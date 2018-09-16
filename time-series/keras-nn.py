@@ -2,6 +2,8 @@
 from keras.models import Sequential
 from keras.layers import Dense
 
+from sklearn.model_selection import train_test_split
+
 # The numpy imports
 import numpy
 
@@ -22,8 +24,11 @@ model.add(Dense(1,activation='sigmoid'))
 # create computation graph
 model.compile(loss='binary_crossentropy' , optimizer='adam',metrics=['accuracy'])
 
+# split train and test set
+X_train, X_test, Y_train , Y_test = train_test_split(X , Y , test_size=0.33)
+
 # run the graph
-model.fit(X,Y,epochs=150, batch_size=10)
+model.fit(X_train,Y_train,epochs=150, validation_data=(X_test,Y_test),batch_size=10)
 
 # evaluate the model on training set
 scores = model.evaluate(X, Y)
