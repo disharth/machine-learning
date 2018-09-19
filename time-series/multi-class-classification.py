@@ -19,7 +19,6 @@ Y =  dataset[:,4]
 encoder = LabelEncoder()
 encoder.fit(Y)
 encoder_Y = encoder.transform(Y)
-
 dummy_y = np_utils.to_categorical(encoder_Y)
 
 def baseline_model():
