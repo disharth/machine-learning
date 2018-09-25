@@ -35,7 +35,6 @@ with open('model.json' , 'w') as json_file:
     json_file.write(model_json)
 model.save_weights('model.h5')
 print('model saved to disk')
-
 #load model from disk
 json_file = open('model.json' ,'r')
 loaded_json = json_file.read()
@@ -44,6 +43,12 @@ loaded_model.load_weights('model.h5')
 print("Model loaded from the disk")
 
 loaded_model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy']) 
+print('loaded model ' , type(loaded_model))
+print(X)
+print(numpy.matrix(X[2,:]))
+y_pred = loaded_model.predict_classes(numpy.matrix(X[2,:]))
+print('Predicted class ', y_pred)
 score = loaded_model.evaluate(X, Y, verbose=0)
+
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 

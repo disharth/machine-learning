@@ -64,4 +64,11 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=epochs, bat
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
+#store model to disk
+model_json = model.to_json()
+with open('model.json' , 'w') as json_file:
+    json_file.write(model_json)
+model.save_weights('model.h5')
+print('model saved to disk')
+
 
